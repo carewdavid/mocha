@@ -1,4 +1,8 @@
 #! /bin/bash
+if [[ ! -d site ]]; then
+    mkdir site
+fi
+
 INDEX="./site/index.html"
 echo "<!DOCTYPE html>" > $INDEX #Overwrite any previous contents
 echo "<html lang=\"en-US\">" >> $INDEX
