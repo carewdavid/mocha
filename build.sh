@@ -1,4 +1,9 @@
 #! /bin/bash
+if [[ ! -d posts ]]; then
+    echo "posts/ does not exist. Cannot create site with no posts." >&2
+    exit 1
+fi
+
 if [[ ! -d site ]]; then
     mkdir site
 fi
