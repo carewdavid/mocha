@@ -1,4 +1,4 @@
-# Janko
+# Mocha
 
 ## The world's worst static site generator
 
