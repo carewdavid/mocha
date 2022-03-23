@@ -20,8 +20,9 @@ for article in posts/*.md ; do
     base_name="${article%.md}"
     base_name="${base_name#posts/}"
     html="$base_name.html"
-    pandoc $article --template=site.template --metadata title="$base_name" -o "site/$html"
-    echo "<li><a href=\"$html\">$base_name</a></li>" >> $INDEX
+    title=$(head -1 $article | sed -e 's/# //')
+    pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
+    echo "<li><a href=\"$html\">$title</a></li>" >> $INDEX
 done
 echo "</ul>" >> $INDEX
 echo "</body" >> $INDEX
