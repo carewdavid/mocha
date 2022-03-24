@@ -21,7 +21,9 @@ for article in posts/*.md ; do
     base_name="${base_name#posts/}"
     html="$base_name.html"
     title=$(head -1 $article | sed -e 's/# //')
-    pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
+    if [[ $article -nt "site/$html" ]]; then
+        pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
+    fi
     echo "<li><a href=\"$html\">$title</a></li>" >> $INDEX
 done
 echo "</ul>" >> $INDEX
