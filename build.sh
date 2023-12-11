@@ -9,13 +9,7 @@ if [[ ! -d site ]]; then
 fi
 
 INDEX="./site/index.html"
-echo "<!DOCTYPE html>" > $INDEX #Overwrite any previous contents
-echo "<html lang=\"en-US\">" >> $INDEX
-echo "<head>" >> $INDEX
-echo "<meta charset=\"utf-8\">" >> $INDEX
-echo "<body>" >> $INDEX
-echo "<h1>My Blog</h1>" >> $INDEX
-echo "<ul>" >> $INDEX
+cat head.html >> $INDEX
 for article in posts/*.md ; do
     base_name="${article%.md}"
     base_name="${base_name#posts/}"
@@ -25,8 +19,7 @@ for article in posts/*.md ; do
     echo "<li><a href=\"$html\">$title</a></li>" >> $INDEX
 done
 echo "</ul>" >> $INDEX
-echo "</body" >> $INDEX
-echo "</html" >> $INDEX
+cat foot.html >> $INDEX
 
 
 cd site
