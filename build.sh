@@ -9,7 +9,7 @@ if [[ ! -d site ]]; then
 fi
 
 INDEX="./site/index.html"
-cat head.html >> $INDEX
+cat head.html > $INDEX
 for article in posts/*.md ; do
     base_name="${article%.md}"
     base_name="${base_name#posts/}"
