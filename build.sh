@@ -21,8 +21,3 @@ done
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
 
-
-cd site
-python -m http.server 8080
-
-
