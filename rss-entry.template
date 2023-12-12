@@ -1,0 +1,9 @@
+<entry>
+<title>?title?</title>
+<link rel="alternate" type="text/html" href="?url?"/>
+<id>?url?</id>
+<published>?date?</published>
+<content type="html">
+?body?
+</content>
+</entry>
