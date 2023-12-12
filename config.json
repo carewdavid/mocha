@@ -1,0 +1,7 @@
+{
+    "SiteName": "Example",
+    "BaseUrl": "http://localhost:8080/",
+    "ContentDir": "posts/",
+    "OutputDir": "site/"
+}
+    
