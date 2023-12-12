@@ -10,11 +10,7 @@ fi
 
 INDEX="./site/index.html"
 cat head.html > $INDEX
-for year in posts/* ; do
-    mkdir "site/$year"
-done
-for article in posts/*/*.md ; do
-    echo "$article"
+for article in posts/*.md ; do
     base_name="${article%.md}"
     base_name="${base_name#posts/}"
     html="$base_name.html"
