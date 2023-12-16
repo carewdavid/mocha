@@ -8,6 +8,8 @@ if [[ ! -d site ]]; then
     mkdir site
 fi
 
+cp -r static/ site/
+
 INDEX="./site/index.html"
 cat head.html > $INDEX
 for year in posts/* ; do
@@ -16,7 +18,6 @@ done
 for article in posts/*/*.md ; do
     echo "$article"
     base_name="${article%.md}"
-    #base_name="${base_name#posts/}"
     html="$base_name.html"
     title=$(head -1 $article | sed -e 's/# //')
     pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
