@@ -8,17 +8,16 @@ if [[ ! -d site ]]; then
     mkdir site
 fi
 
+cp -r static/ site/
+
 INDEX="./site/index.html"
-echo "<!DOCTYPE html>" > $INDEX #Overwrite any previous contents
-echo "<html lang=\"en-US\">" >> $INDEX
-echo "<head>" >> $INDEX
-echo "<meta charset=\"utf-8\">" >> $INDEX
-echo "<body>" >> $INDEX
-echo "<h1>My Blog</h1>" >> $INDEX
-echo "<ul>" >> $INDEX
-for article in posts/*.md ; do
+cat head.html > $INDEX
+for year in posts/* ; do
+    mkdir -p "site/$year"
+done
+for article in posts/*/*.md ; do
+    echo "$article"
     base_name="${article%.md}"
-    base_name="${base_name#posts/}"
     html="$base_name.html"
     title=$(head -1 $article | sed -e 's/# //')
     if [[ $article -nt "site/$html" ]]; then
@@ -27,11 +26,5 @@ for article in posts/*.md ; do
     echo "<li><a href=\"$html\">$title</a></li>" >> $INDEX
 done
 echo "</ul>" >> $INDEX
-echo "</body" >> $INDEX
-echo "</html" >> $INDEX
-
-
-cd site
-python -m http.server 8080
-
+cat foot.html >> $INDEX
 

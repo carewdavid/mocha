@@ -1,0 +1,15 @@
+body {
+	margin: 10% auto;
+	max-width: 60em;
+	font-size: 14pt;
+	background: #fefee8
+	color: #002000;
+}
+
+code {
+	background: #eeeeed;
+}
+
+p {
+	font-family: monospace;
+}
