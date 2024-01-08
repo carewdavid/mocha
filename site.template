@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="alternate" title="David Carew's Blog" type="application/atom+xml" href="feed.xml">
+    <link rel="stylesheet" type="text/css" href="static/index.css">
     <meta charset="utf-8">
     <body>
         $body$
