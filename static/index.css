@@ -2,7 +2,7 @@ body {
 	margin: 10% auto;
 	max-width: 60em;
 	font-size: 14pt;
-	background: #fefee8
+	background: #fefee8;
 	color: #002000;
 }
 
@@ -12,4 +12,12 @@ code {
 
 p {
 	font-family: monospace;
+}
+
+#navbar ul{
+    list-style: none;
+}
+#navbar li{
+    
+    display: inline;
 }
