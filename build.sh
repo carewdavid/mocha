@@ -12,11 +12,13 @@ cp -r static/ site/
 
 INDEX="./site/index.html"
 cat head.html > $INDEX
+postlist=$(mktemp)
 for year in posts/* ; do
     mkdir -p "site/$year"
 done
 for article in posts/*/*.md ; do
     echo "$article"
+    echo "$article|$(head -2 $article | tr '\n' '|')" >> "$postlist"
     base_name="${article%.md}"
     html="$base_name.html"
     title=$(head -1 $article | sed -e 's/# //')
@@ -27,4 +29,5 @@ for article in posts/*/*.md ; do
 done
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
+cat $postlist
 
