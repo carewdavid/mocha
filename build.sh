@@ -30,4 +30,5 @@ done
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
 cat $postlist
+rm $postlist
 
