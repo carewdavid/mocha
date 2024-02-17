@@ -12,6 +12,7 @@ cp -r static/ site/
 
 INDEX="./site/index.html"
 cat head.html > $INDEX
+echo "<ul>" >> "$INDEX"
 postlist=$(mktemp)
 for year in posts/* ; do
     mkdir -p "site/$year"
