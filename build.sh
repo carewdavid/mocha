@@ -12,7 +12,6 @@ cp -r static/ site/
 
 INDEX="./site/index.html"
 cat head.html > $INDEX
-echo "<ul>" >> "$INDEX"
 postlist=$(mktemp)
 for year in posts/* ; do
     mkdir -p "site/$year"
@@ -26,8 +25,9 @@ for article in posts/*/*.md ; do
     if [[ $article -nt "site/$html" ]]; then
         pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
     fi
-    echo "<li><a href=\"$html\">$title</a></li>" >> $INDEX
 done
+echo "<ul>" >> $INDEX
+IFS="|" sort -k3 $postlist | sed -e 's/.md/.html/' | awk 'BEGIN{FS="|"} {printf "<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2}' >> $INDEX
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
 cat $postlist
