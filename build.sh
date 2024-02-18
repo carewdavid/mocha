@@ -18,10 +18,12 @@ for year in posts/* ; do
 done
 for article in posts/*/*.md ; do
     echo "$article"
-    echo "$article|$(head -2 $article | tr '\n' '|')" >> "$postlist"
+    metadata="$article|$(head -2 $article | tr '\n' '|' | sed -e 's/# //')"
+    echo "$metadata" >> $postlist
+    postdate=$(echo $metadata | cut -d '|' -f 3)
+    title=$(echo $metadata | cut -d '|' -f 2)
     base_name="${article%.md}"
     html="$base_name.html"
-    title=$(head -1 $article | sed -e 's/# //')
     if [[ $article -nt "site/$html" ]]; then
         pandoc $article --template=site.template --metadata title="$title" -o "site/$html"
     fi
