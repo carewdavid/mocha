@@ -27,7 +27,9 @@ for article in posts/*/*.md ; do
     fi
 done
 echo "<ul>" >> $INDEX
-IFS="|" sort -k3 $postlist | sed -e 's/.md/.html/' | awk 'BEGIN{FS="|"} {printf "<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2}' >> $INDEX
+IFS="|" sort -k3 $postlist \
+    | sed -e 's/.md/.html/' \
+    | awk 'BEGIN{FS="|"} {printf "<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2}' >> $INDEX
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
 cat $postlist
