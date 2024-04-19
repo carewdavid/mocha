@@ -11,7 +11,10 @@ fi
 cp -r static/ site/
 
 INDEX="./site/index.html"
+FEED="./site/feed.xml"
+TODAY=$(date +%F) #yyy-mm-dd date
 cat head.html > $INDEX
+cat feed_head.xml | sed "s/today/$TODAY/" > "$FEED"
 postlist=$(mktemp)
 for year in posts/* ; do
     mkdir -p "site/$year"
@@ -34,8 +37,11 @@ sort -t '|' -r -k3 $postlist > "$sortedposts"
 cat $sortedposts | sed 's/.md/.html/' | awk -F '|' '{printf("<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2)}' >> $INDEX
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
-echo $sortedposts | head -10 | awk 'BEGIN{FS="|"} \
-{printf("<entry>\n<title>%s</title>\n<link rel=\"alternate\" type=\"text/html\" href=\"%s\"/>\n",  $1, $2, $3)}' >> /dev/null
+cat $sortedposts | head -10 | awk 'BEGIN{FS="|"} \
+{printf("<entry>\n<title>%s %s</title>\n\
+<link rel=\"alternate\" type=\"text/html\" href=\"%s\"/>\
+</entry>\n",  $3, $2, $1)}' >> "$FEED"
+cat $sortedposts
 rm "$postlist"
 rm "$sortedposts"
 

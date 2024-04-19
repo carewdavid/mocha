@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>David Carew's Blog</title>
+  <link href="https://dcarew.com/"></link>
+  <updated>today</updated>
+  <author>
+    <name>David Caew</name>
+  </author>
+<id>https://dcarew.com</id>
