@@ -12,6 +12,7 @@ cp -r static/ site/
 
 INDEX="./site/index.html"
 FEED="./site/feed.xml"
+BASE_URL="https://davidcarew.com/"
 TODAY=$(date +%F) #yyy-mm-dd date
 cat head.html > $INDEX
 cat feed_head.xml | sed "s/today/$TODAY/" > "$FEED"
@@ -37,11 +38,14 @@ sort -t '|' -r -k3 $postlist > "$sortedposts"
 cat $sortedposts | sed 's/.md/.html/' | awk -F '|' '{printf("<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2)}' >> $INDEX
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
-cat $sortedposts | head -10 | awk 'BEGIN{FS="|"} \
+cat $sortedposts | head -10 | sed 's/.md/.html/' | awk 'BEGIN{FS="|"} \
 {printf("<entry>\n<title>%s %s</title>\n\
+<updated>%s</updated>\n\
+<id>%s</id>\n\
 <link rel=\"alternate\" type=\"text/html\" href=\"%s\"/>\
-</entry>\n",  $3, $2, $1)}' >> "$FEED"
+</entry>\n",  $3, $2, $3, $1, $1)}' >> "$FEED"
 cat $sortedposts
+echo "</feed>" >> "$FEED" 
 rm "$postlist"
 rm "$sortedposts"
 
