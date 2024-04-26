@@ -10,7 +10,6 @@ my $TODAY = `date +%F`;
 
 while(<STDIN>){
     chomp;
-    s/.md/.html/;
     my ($path, $title, $date) = split(/\|/);
     my $url = $BASE_URL . $path;
     say "<entry>";

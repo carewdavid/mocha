@@ -34,8 +34,8 @@ for article in posts/*/*.md ; do
 done
 echo "<ul>" >> $INDEX
 sortedposts=$(mktemp)
-sort -t '|' -r -k3 $postlist > "$sortedposts"
-cat $sortedposts | sed 's/.md/.html/' | awk -F '|' '{printf("<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2)}' >> $INDEX
+sort -t '|' -r -k3 $postlist | sed 's/.md/.html/' > "$sortedposts"
+cat $sortedposts | awk -F '|' '{printf("<li><a href=\"%s\">%s %s</a></li>\n", $1, $3, $2)}' >> $INDEX
 echo "</ul>" >> $INDEX
 cat foot.html >> $INDEX
 cat $sortedposts | head -10 | ./mocha.pl >> "$FEED"
